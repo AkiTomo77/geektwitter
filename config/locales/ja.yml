@@ -1,0 +1,7 @@
+ja:
+  tweets:
+    index:
+      hello_html: <h1>一覧ページをつくるよ</h1>
+    new:
+      neww_html: <h1>新規投稿</h1>
+      body: '本文'

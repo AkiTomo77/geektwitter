@@ -1,0 +1,53 @@
+<h3>Tweet詳細</h3>
+<%= flash[:notice] %>
+
+<div class="tweet">
+  <p><%= @tweet.body %></p>
+  <p><%= @tweet.created_at %></p>
+  <p>
+    <%= link_to @tweet.video_url.to_s do %>
+      <%= video_tag(@tweet.video.to_s) %>
+    <% end %>
+  </p>
+
+
+  <% if current_user.already_liked?(@tweet) %>
+      <%= link_to tweet_like_path(@tweet), method: :delete do %>
+        <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+      <% end %>
+    <% else %>
+      <%= link_to tweet_likes_path(@tweet), method: :post do %>
+        <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+      <% end %>
+  <% end %>
+
+  <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+
+  <%= image_tag @tweet.image_url, size: "250x200" if @tweet.image? %>
+
+  <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+  <%= link_to "削除する", tweet_path(@tweet.id), method: :delete %>
+</div>
+
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "Tweet一覧に戻る", tweets_path %>

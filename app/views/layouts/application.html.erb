@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geektwitter</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/ea4fe8fdff.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <% if I18n.locale.to_s == "en" %>
+        <%= link_to('日本語', locale: 'ja') %>
+      <% else %>
+        <%= link_to('English', locale: 'en') %>
+      <% end %>
+    </header>
+    
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<%= t(".neww_html")%>
+<%= flash[:notice] %>
+
+<%= form_for @tweet do |f| %>
+  <div class="field">
+    <%= t(".body")%>
+    <%= f.text_field :body, :size => 140 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :video %>
+    <%= f.file_field :video, :accept => 'video/*' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :audio %>
+    <%= f.file_field :audio %>
+  </div>
+
+  <%= f.submit "Tweetする" %>
+<% end %>
+<%= link_to "Tweet一覧に戻る", tweets_path %>
