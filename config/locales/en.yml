@@ -35,10 +35,22 @@ en:
       hello_html: <h1>This is index</h1>
     new:
       neww_html: <h1>This is new</h1>
-      body: 'contents'
+      submit: "tweet"
   activerecord:
     models:
-      tweet: "ユーザー"
+      tweet: "tweet"
+    attributes:
+      tweets:
+        body: "contents"
+        image: "image"
+        audio: "audio"
+        video: "video"
+  helpers:
+    choose_file: "Choose a file"
+    submit:
+      create: "tweet" 
+  links:
+    index: "index page"
       
 
 

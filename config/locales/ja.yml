@@ -4,4 +4,20 @@ ja:
       hello_html: <h1>一覧ページをつくるよ</h1>
     new:
       neww_html: <h1>新規投稿</h1>
-      body: '本文'
+      submit: "ついーとする"
+  activerecord:
+    models:
+      tweet: "ついーと"
+    attributes:
+      tweet:
+        body: "本文"
+        image: "画像"
+        audio: "音声"
+        video: "動画"
+  helpers:
+    choose_file: "ファイルを選ぶ"
+    submit:
+      create: "ついーとするze"
+  links:
+    index: "一覧ページへ" 
+

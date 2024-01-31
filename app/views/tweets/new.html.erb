@@ -3,25 +3,25 @@
 
 <%= form_for @tweet do |f| %>
   <div class="field">
-    <%= t(".body")%>
+    <%= f.label :body %>
     <%= f.text_field :body, :size => 140 %>
   </div>
 
   <div class="field">
     <%= f.label :image %>
-    <%= f.file_field :image  %>
+    <%= f.file_field :image, title: t('helpers.choose_file')  %>
   </div>
 
   <div class="field">
     <%= f.label :video %>
-    <%= f.file_field :video, :accept => 'video/*' %>
+    <%= f.file_field :video, title:  t('helpers.choose_file'), :accept => 'video/*' %>
   </div>
 
   <div class="field">
     <%= f.label :audio %>
-    <%= f.file_field :audio %>
+    <%= f.file_field :audio, title:  t('helpers.choose_file') %>
   </div>
 
-  <%= f.submit "Tweetする" %>
+  <%= f.submit %>
 <% end %>
-<%= link_to "Tweet一覧に戻る", tweets_path %>
+<%= link_to t('links.index'), tweets_path %>
