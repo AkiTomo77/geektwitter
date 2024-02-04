@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do
   resources :users, only: [:show]
+  resources :relationships, only: [:create, :destroy]
 
   resources :tweets do
     resources :likes, only: [:create, :destroy]

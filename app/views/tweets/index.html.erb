@@ -12,11 +12,12 @@
   <% @tweets.each do |t| %>
     <%= image_tag t.image_url, size: "250x200" if t.image? %>
     <%= audio_tag t.audio_url, :controls => true if t.audio? %>
-    
+
+    <%= link_to t.user.name, user_path(t.user.id) %>
+
     <%= link_to (tweet_path(t.id)) do %>
       <div class="tweet">
         <%= t.body %>
-        <%= t.user.email %>
         <%= t.created_at %>
 
           <% if current_user.already_liked?(t) %>
