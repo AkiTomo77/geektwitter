@@ -1,0 +1,6 @@
+<p>フォロー一覧</p><br/>
+  <% @users.each do |user| %>
+  <%= user.name %>
+<% end %>
+
+<%= link_to "戻る", :back %>
