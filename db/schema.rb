@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_04_040153) do
+ActiveRecord::Schema.define(version: 2024_05_28_092429) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,23 @@ ActiveRecord::Schema.define(version: 2024_02_04_040153) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "coordinates", force: :cascade do |t|
+    t.string "name"
+    t.integer "attack", default: 0
+    t.integer "defense", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_entries_on_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "tweet_id", null: false
     t.integer "user_id", null: false
@@ -57,6 +74,42 @@ ActiveRecord::Schema.define(version: 2024_02_04_040153) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tweet_id"], name: "index_likes_on_tweet_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "player_coordinates", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "coordinate_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["coordinate_id"], name: "index_player_coordinates_on_coordinate_id"
+    t.index ["player_id"], name: "index_player_coordinates_on_player_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "name"
+    t.integer "attack", default: 0
+    t.integer "defense", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.string "emoji"
+    t.integer "tweet_id", null: false
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tweet_id"], name: "index_reactions_on_tweet_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -69,12 +122,18 @@ ActiveRecord::Schema.define(version: 2024_02_04_040153) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tweets", force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
     t.string "image"
     t.string "audio"
     t.string "video"
+    t.string "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -97,8 +156,13 @@ ActiveRecord::Schema.define(version: 2024_02_04_040153) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "tweets"
   add_foreign_key "comments", "users"
+  add_foreign_key "entries", "users"
   add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
+  add_foreign_key "messages", "users"
+  add_foreign_key "player_coordinates", "coordinates"
+  add_foreign_key "player_coordinates", "players"
+  add_foreign_key "reactions", "tweets"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
 end

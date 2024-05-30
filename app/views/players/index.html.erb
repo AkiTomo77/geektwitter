@@ -1,0 +1,24 @@
+<%= link_to "tweet一覧ページへ", tweets_path %>
+
+<h1>プレイヤーを選択してください</h1>
+<%= form_with url: coorde_players_path, method: :post do %>
+  <div>
+    <label for="player_id">プレイヤー</label>
+    <select name="player_id" id="player_id">
+      <% @players.each do |player| %>
+        <option value="<%= player.id %>"><%= player.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div>
+    <label for="coordinate_id">装備</label>
+    <select name="coordinate_id" id="coordinate_id">
+      <% @coordinates.each do |coordinate| %>
+        <option value="<%= coordinate.id %>"><%= coordinate.name %> (攻撃: <%= coordinate.attack %>, 防御: <%= coordinate.defense %>)</option>
+      <% end %>
+    </select>
+  </div>
+
+  <%= submit_tag '装備を適用する' %>
+<% end %>

@@ -28,6 +28,8 @@ before_action :authenticate_user!
 
     @comments = @tweet.comments
     @comment = Comment.new
+    @reactions = @tweet.reactions
+    @reaction = Reaction.new
   end
 
   def edit
@@ -53,6 +55,6 @@ before_action :authenticate_user!
   
   private
   def tweet_params
-    params.require(:tweet).permit(:body, :image, :audio)
+    params.require(:tweet).permit(:body, :image, :audio, :video, :level)
   end
 end

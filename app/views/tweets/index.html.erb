@@ -15,6 +15,7 @@
 
     <%= link_to t.user.name, user_path(t.user.id) %>
 
+
     <%= link_to (tweet_path(t.id)) do %>
       <div class="tweet">
         <%= t.body %>
@@ -41,4 +42,7 @@
 </div>
 
 
+
+
 <%= link_to "新規投稿ページへ", new_tweet_path %>
+<%= link_to "選手攻略サイトへ", players_path %>

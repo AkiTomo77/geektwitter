@@ -25,9 +25,30 @@
 
   <%= image_tag @tweet.image_url, size: "250x200" if @tweet.image? %>
 
-  <% if user_signed_in? && current_user.id == t.user_id %>
+  <% if user_signed_in? && current_user.id == @tweet.user_id %>
     <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
     <%= link_to "削除する", tweet_path(@tweet.id), method: :delete %>
+  <% end %>
+</div>
+
+<div class="reaction-wrapper">
+  <p>リアクション一覧</p>
+  <% @reactions.each do |c| %>
+    <details>
+      <%= c.user.email if c.user %>
+      <summary>
+        <%= emojify(c.emoji) %>
+      </summary>
+    </details>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@tweet, @reaction], local: true) do |f| %>
+      <%= f.text_field :emoji, id: "emoji_field" %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i>リアクションする
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 
@@ -39,7 +60,6 @@
       <br>
       <%= c.content %>
     </div>
-      <br>
   <% end %>
 
   <% if user_signed_in? %>
@@ -53,3 +73,16 @@
 </div>
 
 <%= link_to "Tweet一覧に戻る", tweets_path %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var emojiField = document.getElementById("emoji_field");
+  emojiField.addEventListener("input", function() {
+    var emojiRegex = /[\p{Emoji}]/u; // 絵文字の正規表現
+    if (!emojiRegex.test(this.value)) {
+      this.value = ''; // 絵文字以外の入力をクリア
+      alert('Please enter only emojis.');
+    }
+  });
+});
+</script>

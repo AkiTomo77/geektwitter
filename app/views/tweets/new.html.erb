@@ -22,6 +22,25 @@
     <%= f.file_field :audio, title:  t('helpers.choose_file') %>
   </div>
 
+  <h5>授業レベル</h5>
+  <div class="post_form">
+    <%= f.radio_button :level,  5 ,id: 'star6'%>
+    <label for="star6"><span class="text">難しい</span>★</label>
+
+    <%= f.radio_button :level,  4 ,id: 'star7'%>
+    <label for="star7"><span class="text">やや難しい</span>★</label>
+
+    <%= f.radio_button :level, 3 ,id: 'star8'%>
+    <label for="star8"><span class="text">普通</span>★</label>
+
+    <%= f.radio_button :level , 2 ,id: 'star9'%>
+    <label for="star9"><span class="text">やや簡単</span>★</label>
+
+    <%= f.radio_button :level , 1 ,id: 'star10'%>
+    <label for="star10"><span class="text">簡単</span>★</label>
+  </div>
+
   <%= f.submit %>
 <% end %>
+
 <%= link_to t('links.index'), tweets_path %>

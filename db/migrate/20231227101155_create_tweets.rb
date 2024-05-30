@@ -6,6 +6,7 @@ class CreateTweets < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :audio
       t.string :video
+      t.string :level
 
       t.timestamps
     end

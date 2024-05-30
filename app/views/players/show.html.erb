@@ -1,0 +1,17 @@
+<h1><%= @player.name %>のステータス</h1>
+
+<p>基本かわいらしさ: <%= @player.attack %></p>
+<p>基本かっこよさ: <%= @player.defense %></p>
+
+<h2>装備品</h2>
+<ul>
+  <% @player.coordinates.each do |coordinate| %>
+    <li><%= coordinate.name %> (かわいらしさ: <%= coordinate.attack %>, かっこよさ: <%= coordinate.defense %>)</li>
+  <% end %>
+</ul>
+
+<h2>合計ステータス</h2>
+<p>かわいらしさ: <%= @total_stats[:attack] %></p>
+<p>かっこよさ: <%= @total_stats[:defense] %></p>
+
+<%= link_to "選手攻略サイトへ", players_path %>
