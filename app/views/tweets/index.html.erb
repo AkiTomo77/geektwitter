@@ -6,7 +6,6 @@
 
 <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
 
-<%= flash[:notice] %>
 
 <div class="tweets-container">
   <% @tweets.each do |t| %>
